@@ -1,12 +1,9 @@
 import os
-import re
 import time
 
 from byron_Manejadores.pajaro import Pajaro
 from byron_Manejadores.gato import Gato
-from byron_Manejadores.mascota import listaMascotas
-from byron_Manejadores.mascota import return_Mascota
-from byron_Manejadores.mascota import resumenGlobal
+from byron_Manejadores.mascota import listaMascotas, Mascota, return_Mascota, resumenGlobal
 
 
 def crear_Pajaro(name_paj, fecha, hora):
@@ -62,7 +59,6 @@ def resumen_mascota(name_mascota, fecha, hora):
     return escritura
 
 
-
 def archivo():  # cargo mis  archivos y genero mis datos
     ruta = input("\n Ingrese la dirección donde se encuentre su Archivo .mascotas     ")
     extension = "mascotas"
@@ -72,6 +68,7 @@ def archivo():  # cargo mis  archivos y genero mis datos
             contenido = f.read()  # leo el contenido de mi archivo
             splitDatos(contenido)  # print(contenido)
             f.close()  # cierro el archivo
+            os.system("cls")
             print("\nEl  archivo fue registrado correctamente")
         else:
             print("\nEl  archivo no existe ingrese una dirección valida")
@@ -119,9 +116,9 @@ def splitDatos(datos):  # METODO PARA SEPARAR MIS INSTRUCCIONES
             instruccionesNuevas = instruccionesNuevas + resumen_mascota(inst_y_dat[1], fechaActual, horaActual)
 
         elif inst_y_dat[0] == "Resumen_Global":
-
+            instruccionesNuevas = instruccionesNuevas + "\n--------------------------------    RESUMEN GLOBAL  -----------------------------"
             instruccionesNuevas = instruccionesNuevas + resumenGlobal()
-
+            instruccionesNuevas = instruccionesNuevas + "\n---------------------------------------------------------------------------------"
     newrut = "C:\\Users\\ByronJosué\\Desktop\\ResumenMascotas.mascotas_result"
     arch = open(newrut, 'w')
     arch.write(instruccionesNuevas)

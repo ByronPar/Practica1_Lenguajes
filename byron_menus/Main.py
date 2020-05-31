@@ -78,10 +78,10 @@ class Menu:
                 accion()
                 break
             else:
+                os.system("cls")
                 print("\n{0} no es una elección válida".format(eleccion))
 
     def entretenimiento(self):
-        os.system("cls")
         while True:
             mostrar_menu_Entrenimiento()
             eleccion = input("\n   Seleccione una opción: ")
@@ -90,10 +90,10 @@ class Menu:
                 accion()
                 break
             else:
+                os.system("cls")
                 print("\n{0} no es una elección válida".format(eleccion))
 
     def archivo(self):
-        os.system("cls")
         Entretenimiento.archivo()
         self.entretenimiento()
 
@@ -106,4 +106,5 @@ class Menu:
 if __name__ == "__main__":
     mostrar_menu()
     input("\n     --->   Presione Enter Para Continuar")
+    os.system("cls")
     Menu().run()

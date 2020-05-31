@@ -4,14 +4,13 @@ import time
 listaMascotas = []  # VARIABLE GLOBAL PARA ALMACENAR MIS MSACOTAS
 
 
-
 def resumenGlobal():
     fechaActual = time.strftime("%d/%m/%y")
     horaActual = time.strftime("%H:%M:%S")
     global listaMascotas
     cadena = ""
     for mascota in listaMascotas:
-        cadena = cadena + f'\n[{fechaActual} {horaActual}]  {mascota.nombre} , Energia: {mascota.energia} , X: {mascota.posx} , Y: {mascota.posy} , Tipo: {mascota.tipo} , Estado: {mascota.estado}'
+        cadena = cadena + f'\n[{fechaActual}  {horaActual}]  {mascota.nombre} , Energia: {mascota.energia} , X: {mascota.posx} , Y: {mascota.posy} , Tipo: {mascota.tipo} , Estado: {mascota.estado}'
     return cadena
 
 
@@ -28,7 +27,7 @@ def CalcDistancia(p1X, p2X, p1Y, p2Y):  # CALCULO DE LA DISTANCIA RRECORRIDA
 
 
 class Mascota:
-    def __init__(self, nombre, tipo):
+    def __init__(self, nombre=None, tipo=None):
         self.__nombre = nombre
         self.__energia = 1
         self.__estado = "vivo"
@@ -37,39 +36,39 @@ class Mascota:
         self.__tipo = tipo
 
     def dar_Comida(self, peso):
-        if self.__tipo == "gato":
-            if self.__energia == 0 or self.__energia < 0:
-                return f'{self.__nombre}, Muy tarde. Ya me morí.'
+        if self.tipo == "gato":
+            if self.energia == 0 or self.energia < 0:
+                return f'{self.nombre}, Muy tarde. Ya me morí.'
             else:
-                self.__energia = self.__energia + 12 + int(peso)
-                return f'{self.__nombre}, Gracias. Ahora mi energia es {self.__energia}'
+                self.energia = self.energia + 12 + int(peso)
+                return f'{self.nombre}, Gracias. Ahora mi energia es {self.energia}'
         else:  # SIGNIFICA QUE LA MASCOTA ES DE TIPO PAJARO
-            if self.__energia == 0 or self.__energia < 0:
-                return f'{self.__nombre}, Muy tarde. Ya me morí.'
+            if self.energia == 0 or self.energia < 0:
+                return f'{self.nombre}, Muy tarde. Ya me morí.'
             else:
-                self.__energia = self.__energia + (int(peso) * 4)
-                return f'{self.__nombre}, Gracias. Ahora mi energia es {self.__energia}'
+                self.energia = self.energia + (int(peso) * 4)
+                return f'{self.nombre}, Gracias. Ahora mi energia es {self.energia}'
 
     def resumen_Mascota(self):
-        cadena = f'{self.__nombre} , Energia: {self.__energia} , X: {self.__posx} , Y: {self.__posy} , Tipo: {self.__tipo} , Estado: {self.__estado}'
+        cadena = f'{self.nombre} , Energia: {self.energia} , X: {self.posx} , Y: {self.posy} , Tipo: {self.tipo} , Estado: {self.estado}'
         return cadena
 
     def energiaAdejar(self, posx, posy, peso=0):
-        if self.__tipo == 'pajaro':  # energia a dejar para un pajaro
-            distanciaAdeja = CalcDistancia(int(self.__posx), int(posx), int(self.__posy), int(posy))
+        if self.tipo == 'pajaro':  # energia a dejar para un pajaro
+            distanciaAdeja = CalcDistancia(int(self.posx), int(posx), int(self.posy), int(posy))
             energiaAdejar = 10 + int(distanciaAdeja)
             return energiaAdejar
         else:  # energia a dejar para un gato
-            distanciaAdeja = CalcDistancia(int(self.__posx), int(posx), int(self.__posy), int(posy))
+            distanciaAdeja = CalcDistancia(int(self.posx), int(posx), int(self.posy), int(posy))
             energiaAdejar = int(distanciaAdeja / 2) - 12 - int(peso)
             return energiaAdejar
 
     def energiaNecesitada(self, posx, posy, peso=0):
-        if self.__tipo == 'pajaro':  # energia necesitada para un pajaro
-            necesito = self.energiaAdejar(posx, posy) - self.__energia
+        if self.tipo == 'pajaro':  # energia necesitada para un pajaro
+            necesito = self.energiaAdejar(posx, posy) - self.energia
             return necesito
         else:  # energia necesitada para un gato
-            necesito = self.energiaAdejar(posx, posy, peso) - self.__energia
+            necesito = self.energiaAdejar(posx, posy, peso) - self.energia
             return necesito
 
     @property
