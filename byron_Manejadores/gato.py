@@ -5,7 +5,7 @@ class Gato(Mascota):
     def __init__(self, nombre):
         super().__init__(nombre, tipo='gato')
 
-    def convieneComer(self, posx, posy, peso):
+    def conviene_Comer(self, posx, posy, peso):
         if self.__energia == 0:
             return f'{self.__nombre}, ya me mori'
         elif self.__energia >= int(self.energiaAdejar(posx, posy, peso)):

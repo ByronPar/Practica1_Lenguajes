@@ -3,8 +3,64 @@ import re
 import time
 
 from byron_Manejadores.pajaro import Pajaro
+from byron_Manejadores.gato import Gato
 from byron_Manejadores.mascota import listaMascotas
 from byron_Manejadores.mascota import return_Mascota
+from byron_Manejadores.mascota import resumenGlobal
+
+
+def crear_Pajaro(name_paj, fecha, hora):
+    listaMascotas.append(Pajaro(name_paj))
+    escritura = "\n[" + fecha + "  " + hora + "]  " + "Se Creo el pájaro " + name_paj
+    return escritura
+
+
+def puede_entregar_mensaje(datos_paj, fecha, hora):
+    atributos = datos_paj.split(sep=',')
+    pajaro = return_Mascota(atributos[0])
+    escritura = "\n[" + fecha + "  " + hora + "]  " + pajaro.puedeEntregarMensaje(atributos[1], atributos[2])
+    return escritura
+
+
+def enviar_mensaje(datos_paj, fecha, hora):
+    atributos = datos_paj.split(sep=',')
+    pajaro = return_Mascota(atributos[0])
+    escritura = "\n[" + fecha + "  " + hora + "]  " + pajaro.enviarMensaje(atributos[1], atributos[2])
+    return escritura
+
+
+def crear_Gato(name_cat, fecha, hora):
+    listaMascotas.append(Gato(name_cat))
+    escritura = "\n[" + fecha + "  " + hora + "]  " + "Se Creo el gato " + name_cat
+    return escritura
+
+
+def conviene_comer_raton(datos_cat, fecha, hora):
+    atributos = datos_cat.split(sep=',')
+    gato = return_Mascota(atributos[0])
+    escritura = "\n[" + fecha + "  " + hora + "]  " + gato.conviene_Comer(atributos[1], atributos[2], atributos[3])
+    return escritura
+
+
+def enviar_comer_raton(datos_cat, fecha, hora):
+    atributos = datos_cat.split(sep=',')
+    gato = return_Mascota(atributos[0])
+    escritura = "\n[" + fecha + "  " + hora + "]  " + gato.comer_raton(atributos[1], atributos[2], atributos[3])
+    return escritura
+
+
+def enviar_comer(datos_Animal, fecha, hora):
+    atributos = datos_Animal.split(sep=',')
+    mascota = return_Mascota(atributos[0])
+    escritura = "\n[" + fecha + "  " + hora + "]  " + mascota.dar_Comida(atributos[1])
+    return escritura
+
+
+def resumen_mascota(name_mascota, fecha, hora):
+    mascota = return_Mascota(name_mascota)
+    escritura = "\n[" + fecha + "  " + hora + "]  " + mascota.resumen_Mascota()
+    return escritura
+
 
 
 def archivo():  # cargo mis  archivos y genero mis datos
@@ -16,9 +72,9 @@ def archivo():  # cargo mis  archivos y genero mis datos
             contenido = f.read()  # leo el contenido de mi archivo
             splitDatos(contenido)  # print(contenido)
             f.close()  # cierro el archivo
-        # AQUI RETORNARE MI LINK CON MI ARCHIVO CREADO
+            print("\nEl  archivo fue registrado correctamente")
         else:
-            print("\nEl  archivo no existe ingrese una dirección valida");
+            print("\nEl  archivo no existe ingrese una dirección valida")
     else:
         print("\n Debe Ingresar Un archivo con la extension solicitada,    VUELVA A INTENTARLO")
 
@@ -31,119 +87,42 @@ def splitDatos(datos):  # METODO PARA SEPARAR MIS INSTRUCCIONES
         horaActual = time.strftime("%H:%M:%S")
         inst_y_dat = i.split(sep=':')
         if inst_y_dat[0] == "Crear_Pajaro":
-            listaMascotas.append(Pajaro(inst_y_dat[1]))
-            instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + "Se Creo el pájaro " + \
-                                  inst_y_dat[1]
+
+            instruccionesNuevas = instruccionesNuevas + crear_Pajaro(inst_y_dat[1], fechaActual, horaActual)
+
         elif inst_y_dat[0] == "Puede_Entregar_Mensaje":
-            atributos = inst_y_dat[1].split(sep=',')
-            pajaro = return_Mascota(atributos[0])
-            instruccionesNuevas = instruccionesNuevas + pajaro.puedeEntregarMensaje(atributos[1], atributos[2])
 
+            instruccionesNuevas = instruccionesNuevas + puede_entregar_mensaje(inst_y_dat[1], fechaActual, horaActual)
 
+        elif inst_y_dat[0] == "Enviar_Mensaje":
 
+            instruccionesNuevas = instruccionesNuevas + enviar_mensaje(inst_y_dat[1], fechaActual, horaActual)
 
+        elif inst_y_dat[0] == "Crear_Gato":
 
-            if Pajaro.puedeEntregarMensaje(" ", opcPuede[0], opcPuede[1], opcPuede[2]) == "si":
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Si puedo ir a dejar el mensaje"
-            elif Pajaro.puedeEntregarMensaje(" ", opcPuede[0], opcPuede[1], opcPuede[2]) == "comida":
-                energia = Pajaro.energiaNecesitada(" ", opcPuede[0], opcPuede[1], opcPuede[2])
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Estoy exhausto. Dame de comer " + str(energia) + " para ir."
-            elif Pajaro.puedeEntregarMensaje(" ", opcPuede[0], opcPuede[1], opcPuede[2]) == "muerto":
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Ya me mori"
+            instruccionesNuevas = instruccionesNuevas + crear_Gato(inst_y_dat[1], fechaActual, horaActual)
 
+        elif inst_y_dat[0] == "Conviene_Comer_Raton":
 
-        elif instruccion[indice] == "Enviar_Mensaje":
-            fechaActual = time.strftime("%d/%m/%y")
-            horaActual = time.strftime("%H:%M:%S")
-            opcPuede = instruccion[indice + 1].split(sep=',')
-            if Pajaro.enviarMensaje(" ", opcPuede[0], opcPuede[1], opcPuede[2]) == "si":
+            instruccionesNuevas = instruccionesNuevas + conviene_comer_raton(inst_y_dat[1], fechaActual, horaActual)
 
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Ya fui a dejar el msj a (" + opcPuede[1] + "," + opcPuede[
-                                          2] + ")"
-            elif Pajaro.enviarMensaje(" ", opcPuede[0], opcPuede[1], opcPuede[2]) == "comida":
-                energia = Pajaro.energiaNecesitada(" ", opcPuede[0], opcPuede[1], opcPuede[2])
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Estoy exhausto. Dame de comer " + str(energia) + " para ir."
-            elif Pajaro.enviarMensaje(" ", opcPuede[0], opcPuede[1], opcPuede[2]) == "muerto":
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Ya me mori"
-        elif instruccion[indice] == "Crear_Gato":
-            fechaActual = time.strftime("%d/%m/%y")
-            horaActual = time.strftime("%H:%M:%S")
-            gatoNuevo = Gato(instruccion[indice + 1])
-            instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + "Se Creo el gato " + \
-                                  instruccion[indice + 1]
-            Mascota.listarMascota(" ", gatoNuevo)
+        elif inst_y_dat[0] == "Enviar_Comer_Raton":
 
-        elif instruccion[indice] == "Conviene_Comer_Raton":
-            fechaActual = time.strftime("%d/%m/%y")
-            horaActual = time.strftime("%H:%M:%S")
+            instruccionesNuevas = instruccionesNuevas + enviar_comer_raton(inst_y_dat[1], fechaActual, horaActual)
 
-            opcPuede = instruccion[indice + 1].split(sep=',')
-            if Gato.convieneComer(" ", opcPuede[0], opcPuede[1], opcPuede[2], opcPuede[3]) == "si":
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Si me conviene comerme al raton"
-            elif Gato.convieneComer(" ", opcPuede[0], opcPuede[1], opcPuede[2], opcPuede[3]) == "comida":
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Esta muy lejos. No me conviene"
-            elif Gato.convieneComer(" ", opcPuede[0], opcPuede[1], opcPuede[2], opcPuede[3]) == "muerto":
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Ya me mori"
+        elif inst_y_dat[0] == "Dar_de_Comer":
 
-        elif instruccion[indice] == "Enviar_Comer_Raton":
-            fechaActual = time.strftime("%d/%m/%y")
-            horaActual = time.strftime("%H:%M:%S")
-            opcPuede = instruccion[indice + 1].split(sep=',')
-            if Gato.convieneComer(" ", opcPuede[0], opcPuede[1], opcPuede[2], opcPuede[3]) == "si":
-                energianew = Gato.energiaNueva(" ", opcPuede[0], opcPuede[1], opcPuede[2], opcPuede[3])
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Ya me comí al ratón, ahora mi energía es " + str(energianew)
-            elif Gato.convieneComer(" ", opcPuede[0], opcPuede[1], opcPuede[2], opcPuede[3]) == "comida":
-                energia = Gato.energiaNecesitada(" ", opcPuede[0], opcPuede[1], opcPuede[2], opcPuede[3])
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Estoy exhausto. Dame de comer " + str(energia) + " para ir."
-            elif Gato.convieneComer(" ", opcPuede[0], opcPuede[1], opcPuede[2], opcPuede[3]) == "muerto":
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Ya me mori"
+            instruccionesNuevas = instruccionesNuevas + enviar_comer(inst_y_dat[1], fechaActual, horaActual)
 
-        elif instruccion[indice] == "Dar_de_Comer":
-            fechaActual = time.strftime("%d/%m/%y")
-            horaActual = time.strftime("%H:%M:%S")
-            opcPuede = instruccion[indice + 1].split(sep=',')
+        elif inst_y_dat[0] == "Resumen_Mascota":
 
-            if Mascota.compComida(" ", opcPuede[0]) == "no existe":
-                print("\n Mascota no Existe")
-            elif Mascota.compComida(" ", opcPuede[0]) == "muerto":
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Muy tarde. Ya me morí."
-            elif Mascota.compComida(" ", opcPuede[0]) == "si":
-                energianew = Mascota.darComida(" ", opcPuede[0], opcPuede[1])
-                instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
-                                      opcPuede[0] + " , Gracias. Ahora mi energia es " + str(energianew)
+            instruccionesNuevas = instruccionesNuevas + resumen_mascota(inst_y_dat[1], fechaActual, horaActual)
 
-        elif instruccion[indice] == "Resumen_Mascota":
-            fechaActual = time.strftime("%d/%m/%y")
-            horaActual = time.strftime("%H:%M:%S")
-            cadenanew = Mascota.resumenMascota(" ", instruccion[indice + 1])
-            instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + cadenanew
+        elif inst_y_dat[0] == "Resumen_Global":
 
-        elif instruccion[indice] == "Resumen_Global":
-            fechaActual = time.strftime("%d/%m/%y")
-            horaActual = time.strftime("%H:%M:%S")
-            cadenanew = Mascota.resumenGlobal(" ")
-            instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  --------------------------------------- RESUMEN GLOBAL --------------------------------------- " + cadenanew + "\n[" + fechaActual + "  " + horaActual + "]  ---------------------------------------------------------------------------------------------- "
-            indice = indice - 1
+            instruccionesNuevas = instruccionesNuevas + resumenGlobal()
 
-        if (indice + 2) <= len(instruccion):
-            indice = indice + 2
-    newrut = "C:\\Users\\HP ENVY\\Desktop\\ResumenMascotas.mascotas_result"
+    newrut = "C:\\Users\\ByronJosué\\Desktop\\ResumenMascotas.mascotas_result"
     arch = open(newrut, 'w')
     arch.write(instruccionesNuevas)
     arch.close()
-    os.system("cls")
-    msj = "asd"
-    self.run(msj)

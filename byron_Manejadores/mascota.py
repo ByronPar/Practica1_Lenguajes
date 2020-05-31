@@ -11,9 +11,7 @@ def resumenGlobal():
     global listaMascotas
     cadena = ""
     for mascota in listaMascotas:
-        cadena = cadena + "\n[" + fechaActual + "  " + horaActual + "]  " + mascota.nombre + " , " + "Energia: " + str(
-            mascota.energia) + " , X: " + str(mascota.posx) + " , Y: " + str(
-            mascota.posy) + " , Tipo: " + mascota.tipo + " , Estado: " + mascota.estado
+        cadena = cadena + f'\n[{fechaActual} {horaActual}]  {mascota.nombre} , Energia: {mascota.energia} , X: {mascota.posx} , Y: {mascota.posy} , Tipo: {mascota.tipo} , Estado: {mascota.estado}'
     return cadena
 
 
@@ -38,16 +36,22 @@ class Mascota:
         self.__posy = 0.0
         self.__tipo = tipo
 
-    def darComida(self, peso):
+    def dar_Comida(self, peso):
         if self.__tipo == "gato":
-            self.__energia = self.__energia + 12 + int(peso)
+            if self.__energia == 0 or self.__energia < 0:
+                return f'{self.__nombre}, Muy tarde. Ya me morí.'
+            else:
+                self.__energia = self.__energia + 12 + int(peso)
+                return f'{self.__nombre}, Gracias. Ahora mi energia es {self.__energia}'
         else:  # SIGNIFICA QUE LA MASCOTA ES DE TIPO PAJARO
-            self.__energia = self.__energia + (int(peso) * 4)
+            if self.__energia == 0 or self.__energia < 0:
+                return f'{self.__nombre}, Muy tarde. Ya me morí.'
+            else:
+                self.__energia = self.__energia + (int(peso) * 4)
+                return f'{self.__nombre}, Gracias. Ahora mi energia es {self.__energia}'
 
-    def resumenMascota(self):
-        cadena = self.__nombre + " , " + "Energia: " + str(self.__energia) + " , X: " + str(
-            self.__posx) + " , Y: " + str(
-            self.__posy) + " , Tipo: " + self.__tipo + " , Estado: " + self.__estado
+    def resumen_Mascota(self):
+        cadena = f'{self.__nombre} , Energia: {self.__energia} , X: {self.__posx} , Y: {self.__posy} , Tipo: {self.__tipo} , Estado: {self.__estado}'
         return cadena
 
     def energiaAdejar(self, posx, posy, peso=0):
