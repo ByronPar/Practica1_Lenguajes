@@ -2,9 +2,9 @@ import os
 import re
 import time
 
-from byron_Manejadores.byron_beans.mascota import Mascota
-from byron_Manejadores.byron_beans.mascota import Pajaro
-from byron_Manejadores.byron_beans.mascota import Gato
+from byron_Manejadores.mascota import Mascota
+from byron_Manejadores.mascota import Pajaro
+from byron_Manejadores.mascota import Gato
 
 
 class Entretenimiento:
@@ -194,7 +194,7 @@ class Entretenimiento:
         self.run(msj)
 
     def regresar(self):  # Regreso a mi menu principal
-        from Main import Menu
+        from byron_menus.Main import Menu
         Main = Menu()
         os.system("cls")
         Main.run()

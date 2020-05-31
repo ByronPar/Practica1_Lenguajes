@@ -1,8 +1,8 @@
 import os
 import re
 
-from byron_Manejadores.byron_beans.almacen import Almacen
-from byron_Manejadores.byron_beans.calculadora import Calculadora
+from byron_Manejadores.almacen import Almacen
+
 
 class Educacion:
     def __init__(self):
@@ -37,7 +37,7 @@ class Educacion:
                 print("{0} no es una elección válida".format(eleccion))
 
     def regresar(self):  # Regreso a mi menu principal
-        from Main import Menu
+        from byron_menus.Main import Menu
         Main = Menu()
         os.system("cls")
         Main.run()
