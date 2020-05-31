@@ -1,5 +1,4 @@
 from byron_Manejadores.mascota import Mascota
-from byron_Manejadores.mascota import CalcDistancia
 
 
 class Pajaro(Mascota):

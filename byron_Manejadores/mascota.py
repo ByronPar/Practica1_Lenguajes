@@ -4,25 +4,16 @@ import time
 listaMascotas = []  # VARIABLE GLOBAL PARA ALMACENAR MIS MSACOTAS
 
 
-def verificar_nombre(nombre_Mascota):
-    global listaMascotas
-    for mascota in listaMascotas:
-        if mascota.nombre == nombre_Mascota:
-            print(f'\nEl nombre {nombre_Mascota} no es validoporque ya existe.')
-            return False
-    return True
-
 
 def resumenGlobal():
     fechaActual = time.strftime("%d/%m/%y")
     horaActual = time.strftime("%H:%M:%S")
     global listaMascotas
     cadena = ""
-    for i in listaMascotas:
-        mascota = i
+    for mascota in listaMascotas:
         cadena = cadena + "\n[" + fechaActual + "  " + horaActual + "]  " + mascota.nombre + " , " + "Energia: " + str(
-            mascota.energia) + " , X: " + str(mascota.posX) + " , Y: " + str(
-            mascota.posY) + " , Tipo: " + mascota.tipo + " , Estado: " + mascota.estado
+            mascota.energia) + " , X: " + str(mascota.posx) + " , Y: " + str(
+            mascota.posy) + " , Tipo: " + mascota.tipo + " , Estado: " + mascota.estado
     return cadena
 
 

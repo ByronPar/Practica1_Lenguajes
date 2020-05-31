@@ -2,19 +2,20 @@ import os
 import re
 import time
 
-from byron_Manejadores.mascota import Mascota
-from byron_Manejadores.mascota import Pajaro
-from byron_Manejadores.mascota import Gato
+from byron_Manejadores.pajaro import Pajaro
+from byron_Manejadores.mascota import listaMascotas
+from byron_Manejadores.mascota import return_Mascota
+
 
 def archivo():  # cargo mis  archivos y genero mis datos
     ruta = input("\n Ingrese la dirección donde se encuentre su Archivo .mascotas     ")
     extension = "mascotas"
     if ruta[len(ruta) - 8:len(ruta)] == extension:  # VERIFICO QUE SEA UNA Ruta con la extension adecuda
         if os.path.isfile(ruta):  # Verificar que el archivo exista
-            f = open(ruta, 'r')   #ABRO EL ARCHIVO
+            f = open(ruta, 'r')  # ABRO EL ARCHIVO
             contenido = f.read()  # leo el contenido de mi archivo
             splitDatos(contenido)  # print(contenido)
-            f.close()             #cierro el archivo
+            f.close()  # cierro el archivo
         # AQUI RETORNARE MI LINK CON MI ARCHIVO CREADO
         else:
             print("\nEl  archivo no existe ingrese una dirección valida");
@@ -23,25 +24,25 @@ def archivo():  # cargo mis  archivos y genero mis datos
 
 
 def splitDatos(datos):  # METODO PARA SEPARAR MIS INSTRUCCIONES
-    pattern = re.compile("\n|:")
-    instruccion = pattern.split(datos)
+    instruccion = datos.split('\n')
     instruccionesNuevas = ""  # todas las instrucciones que mandare a mi nuevo file.mascotas_result
-    indice = 0
-    while indice < len(instruccion):
-        if instruccion[indice] == "Crear_Pajaro":
-            fechaActual = time.strftime("%d/%m/%y")
-            horaActual = time.strftime("%H:%M:%S")
-            pajaroNuevo = Pajaro(instruccion[indice + 1])
+    for i in instruccion:
+        fechaActual = time.strftime("%d/%m/%y")
+        horaActual = time.strftime("%H:%M:%S")
+        inst_y_dat = i.split(sep=':')
+        if inst_y_dat[0] == "Crear_Pajaro":
+            listaMascotas.append(Pajaro(inst_y_dat[1]))
             instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + "Se Creo el pájaro " + \
-                                  instruccion[indice + 1]
-            Mascota.listarMascota(" ", pajaroNuevo)
+                                  inst_y_dat[1]
+        elif inst_y_dat[0] == "Puede_Entregar_Mensaje":
+            atributos = inst_y_dat[1].split(sep=',')
+            pajaro = return_Mascota(atributos[0])
+            instruccionesNuevas = instruccionesNuevas + pajaro.puedeEntregarMensaje(atributos[1], atributos[2])
 
 
-        elif instruccion[indice] == "Puede_Entregar_Mensaje":
-            fechaActual = time.strftime("%d/%m/%y")
-            horaActual = time.strftime("%H:%M:%S")
 
-            opcPuede = instruccion[indice + 1].split(sep=',')
+
+
             if Pajaro.puedeEntregarMensaje(" ", opcPuede[0], opcPuede[1], opcPuede[2]) == "si":
                 instruccionesNuevas = instruccionesNuevas + "\n[" + fechaActual + "  " + horaActual + "]  " + \
                                       opcPuede[0] + " , Si puedo ir a dejar el mensaje"
