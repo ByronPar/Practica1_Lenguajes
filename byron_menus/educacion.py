@@ -3,45 +3,6 @@ import re
 
 from byron_Manejadores.manejador_almacen.almacen import Almacen
 
-
-class Educacion:
-    def __init__(self):
-
-        self.elecciones = {  # mi diccionario menu
-            "1": self.archivoEducacion,
-            "2": self.archivoAlmacen,
-            "3": self.regresar
-        }
-
-    def mostrar_menu(self):
-
-        print("""
-    ########################      Menu Educación      ########################
-
-    1 Cargar Archivo .edu
-    2 Cargar Archivo .almacen
-    3 Regresar al Menu Principal
-    """)
-
-    def run(self, msj):  # Para Correr mi menu
-
-        while True:
-            self.mostrar_menu()
-            eleccion = input("Seleccione una opción: ")
-            accion = self.elecciones.get(eleccion)
-            if accion:
-                accion()
-                break
-
-            else:
-                print("{0} no es una elección válida".format(eleccion))
-
-    def regresar(self):  # Regreso a mi menu principal
-        from byron_menus.Main import Menu
-        Main = Menu()
-        os.system("cls")
-        Main.run()
-
     def archivoEducacion(self): #Cargo mi archivo .edu y genero mis datos con programación funcional
         ruta = input("\n Ingrese la dirección donde se encuentre su Archivo .edu     ")
 
