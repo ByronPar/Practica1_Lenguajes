@@ -1,10 +1,8 @@
-import msvcrt
 import os
 import sys
-from datetime import time
 
-from Educacion import Educacion
-from Entretenimiento import Entretenimiento
+from byron_menus.Educacion import Educacion
+from byron_menus import Entretenimiento
 
 
 def mostrar_menuOpciones():
@@ -38,15 +36,25 @@ def mostrar_menu():
 
 """)
 
+def mostrar_menu_Entrenimiento():
+    print("""
+########################      Menu Entretenimiento      ########################
+
+                1)   Cargar Archivo  .mascotas
+                2)   Regresar al Menu Principal
+""")
 
 class Menu:
     def __init__(self):
         self.Educacion = Educacion()
-        self.Entretenimiento = Entretenimiento()
         self.elecciones = {  # mi diccionario menu
             "1": self.entretenimiento,
             "2": self.educacion,
             "3": self.quit
+        }
+        self.elecciones_Entrenimiento = {  # mi diccionario menu
+            "1": self.archivo,
+            "2": self.regresar
         }
 
     def run(self):  # Para Correr mi menu
@@ -61,9 +69,25 @@ class Menu:
                 print("\n{0} no es una elección válida".format(eleccion))
 
     def entretenimiento(self):
-        msj = "hola"
         os.system("cls")
-        self.Entretenimiento.run(msj)
+        while True:
+            mostrar_menu_Entrenimiento()
+            eleccion = input("\n   Seleccione una opción: ")
+            accion = self.elecciones_Entrenimiento.get(eleccion)
+            if accion:
+                accion()
+                break
+            else:
+                print("\n{0} no es una elección válida".format(eleccion))
+
+    def archivo(self):
+        os.system("cls")
+        Entretenimiento.archivo()
+        self.entretenimiento()
+
+    def regresar(self):  # Regreso a mi menu principal
+        os.system("cls")
+        Menu().run()
 
     def educacion(self):
         msj = "hola"
