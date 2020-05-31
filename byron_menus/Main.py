@@ -6,7 +6,6 @@ from byron_menus import Entretenimiento
 
 
 def mostrar_menuOpciones():
-
     print("""
 #########################      Menu Principal      #########################
 
@@ -36,6 +35,7 @@ def mostrar_menu():
 
 """)
 
+
 def mostrar_menu_Entrenimiento():
     print("""
 ########################      Menu Entretenimiento      ########################
@@ -44,17 +44,29 @@ def mostrar_menu_Entrenimiento():
                 2)   Regresar al Menu Principal
 """)
 
+
+def regresar():  # Regreso a mi menu principal
+    os.system("cls")
+    Menu().run()
+
+
+def quit():
+    os.system("cls")
+    print("\n FIN DE LA APLICACIÓN  ")
+    sys.exit(0)
+
+
 class Menu:
     def __init__(self):
         self.Educacion = Educacion()
         self.elecciones = {  # mi diccionario menu
             "1": self.entretenimiento,
             "2": self.educacion,
-            "3": self.quit
+            "3": quit
         }
         self.elecciones_Entrenimiento = {  # mi diccionario menu
             "1": self.archivo,
-            "2": self.regresar
+            "2": regresar
         }
 
     def run(self):  # Para Correr mi menu
@@ -85,19 +97,10 @@ class Menu:
         Entretenimiento.archivo()
         self.entretenimiento()
 
-    def regresar(self):  # Regreso a mi menu principal
-        os.system("cls")
-        Menu().run()
-
     def educacion(self):
         msj = "hola"
         os.system("cls")
         self.Educacion.run(msj)
-
-    def quit(self):
-        os.system("cls")
-        print("\n FIN DE LA APLICACIÓN  ")
-        sys.exit(0)
 
 
 if __name__ == "__main__":
