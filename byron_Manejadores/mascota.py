@@ -4,11 +4,6 @@ import time
 listaMascotas = []  # VARIABLE GLOBAL PARA ALMACENAR MIS MSACOTAS
 
 
-def listarMascota(nombre_masc):
-    global listaMascotas
-    listaMascotas.append(nombre_masc)
-
-
 def verificar_nombre(nombre_Mascota):
     global listaMascotas
     for mascota in listaMascotas:
@@ -44,13 +39,13 @@ def CalcDistancia(p1X, p2X, p1Y, p2Y):  # CALCULO DE LA DISTANCIA RRECORRIDA
 
 
 class Mascota:
-    def __init__(self, nombre):
+    def __init__(self, nombre, tipo):
         self.__nombre = nombre
         self.__energia = 1
         self.__estado = "vivo"
         self.__posx = 0.0
         self.__posy = 0.0
-        self.__tipo = None
+        self.__tipo = tipo
 
     def darComida(self, peso):
         if self.__tipo == "gato":

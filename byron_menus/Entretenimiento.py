@@ -23,7 +23,6 @@ def archivo():  # cargo mis  archivos y genero mis datos
 
 
 def splitDatos(datos):  # METODO PARA SEPARAR MIS INSTRUCCIONES
-
     pattern = re.compile("\n|:")
     instruccion = pattern.split(datos)
     instruccionesNuevas = ""  # todas las instrucciones que mandare a mi nuevo file.mascotas_result

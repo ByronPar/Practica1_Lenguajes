@@ -1,61 +1,37 @@
+from byron_Manejadores.mascota import Mascota
+from byron_Manejadores.mascota import CalcDistancia
+
+
 class Pajaro(Mascota):
-    tipo = "Pajaro"
-
     def __init__(self, nombre):
-        Mascota.__init__(self, nombre)
-        self.tipo = "Pajaro"
+        super().__init__(nombre, tipo='pajaro')
 
-    def puedeEntregarMensaje(self, nombre, posx, posy):
-        global listaMascotas
-        for i in listaMascotas:
+    def puedeEntregarMensaje(self, posx, posy):
+        if self.__energia == 0:
+            return f'{self.__nombre}, ya me mori'
+        elif self.__energia >= self.energiaAdejar(posx, posy):
+            return f'{self.__nombre}, si Puedo ir a dejar el mensaje'
+        elif self.__energia < self.energiaAdejar(posx, posy):
+            return f'{self.__nombre}, Estoy exhausto. Dame de comer {self.energiaNecesitada(posx, posy)} para ir.'
 
-            mascota = i
-            if mascota.nombre == nombre:
-                if mascota.tipo == "Pajaro":
-                    distanciaAdeja = mascota.CalcDistancia(int(mascota.posX), int(posx), int(mascota.posY),
-                                                           int(posy))  # distancia en kilometros
-                    energiaAdejar = 10 + distanciaAdeja
-                    if mascota.energia == 0:
-                        return "muerto"
-                    elif mascota.energia >= energiaAdejar:
-                        return "si"
-                    elif mascota.energia < energiaAdejar:
-                        return "comida"
+    def enviarMensaje(self, posx, posy):
+        if self.__energia == 0:
+            return f'{self.__nombre}, ya me mori'
+        elif self.__energia >= self.energiaAdejar(posx, posy):
+            self.__energia = self.__energia - self.energiaAdejar(posx, posy)
+            self.__posx = posx
+            self.__posy = posy
+            if self.__energia == 0:
+                self.__estado = 'muerto'
+            return f'{self.__nombre}, Ya fui a dejar el mensaje a ( {posx} , {posy} )'
+        elif self.__energia < self.energiaAdejar(posx, posy):
+            return f'{self.__nombre}, Estoy exhausto. Dame de comer {self.energiaNecesitada(posx, posy)} para ir.'
 
-    def enviarMensaje(self, nombre, posx, posy):
-        global listaMascotas
-        indice = 0
-        est = "muerto"
-        for i in listaMascotas:
-            mascota = i
-            if mascota.nombre == nombre:
-                if mascota.tipo == "Pajaro":
-                    distanciaAdeja = mascota.CalcDistancia(int(mascota.posX), int(posx), int(mascota.posY), int(posy))
-                    energiaAdejar = 10 + int(distanciaAdeja)
-                    if mascota.energia == 0:
-                        return "muerto"
-                    elif mascota.energia >= energiaAdejar:
-                        mascota.energia = mascota.energia - energiaAdejar
-                        mascota.posX = posx
-                        mascota.posY = posy
-                        if mascota.energia == 0:
-                            mascota.estado = est
-                            listaMascotas[indice] = mascota
-                            return "si"
-                        else:
-                            listaMascotas[indice] = mascota
-                            return "si"
-                    elif mascota.energia < energiaAdejar:
-                        return "comida"
-            indice = indice + 1
+    def energiaNecesitada(self, posx, posy):
+        necesito = self.energiaAdejar(posx, posy) - self.__energia
+        return necesito
 
-    def energiaNecesitada(self, nombre, posx, posy):
-        global listaMascotas
-        for i in listaMascotas:
-            mascota = i
-            if mascota.nombre == nombre:
-                if mascota.tipo == "Pajaro":
-                    distanciaAdeja = mascota.CalcDistancia(int(mascota.posX), int(posx), int(mascota.posY), int(posy))
-                    energiaAdejar = 10 + int(distanciaAdeja)
-                    necesito = energiaAdejar - mascota.energia
-                    return necesito
+    def energiaAdejar(self, posx, posy):
+        distanciaAdeja = CalcDistancia(int(self.__posx), int(posx), int(self.__posy), int(posy))
+        energiaAdejar = 10 + int(distanciaAdeja)
+        return energiaAdejar
