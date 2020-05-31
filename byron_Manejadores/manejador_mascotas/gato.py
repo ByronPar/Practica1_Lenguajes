@@ -1,4 +1,4 @@
-from byron_Manejadores.mascota import Mascota
+from byron_Manejadores.manejador_mascotas.mascota import Mascota
 
 
 class Gato(Mascota):

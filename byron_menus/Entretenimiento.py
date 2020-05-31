@@ -1,9 +1,9 @@
 import os
 import time
 
-from byron_Manejadores.pajaro import Pajaro
-from byron_Manejadores.gato import Gato
-from byron_Manejadores.mascota import listaMascotas, Mascota, return_Mascota, resumenGlobal
+from byron_Manejadores.manejador_mascotas.pajaro import Pajaro
+from byron_Manejadores.manejador_mascotas.gato import Gato
+from byron_Manejadores.manejador_mascotas.mascota import listaMascotas, return_Mascota, resumenGlobal
 
 
 def crear_Pajaro(name_paj, fecha, hora):
@@ -71,8 +71,10 @@ def archivo():  # cargo mis  archivos y genero mis datos
             os.system("cls")
             print("\nEl  archivo fue registrado correctamente")
         else:
+            os.system("cls")
             print("\nEl  archivo no existe ingrese una dirección valida")
     else:
+        os.system("cls")
         print("\n Debe Ingresar Un archivo con la extension solicitada,    VUELVA A INTENTARLO")
 
 

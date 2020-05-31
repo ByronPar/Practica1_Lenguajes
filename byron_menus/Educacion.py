@@ -1,7 +1,7 @@
 import os
 import re
 
-from byron_Manejadores.almacen import Almacen
+from byron_Manejadores.manejador_almacen.almacen import Almacen
 
 
 class Educacion:
