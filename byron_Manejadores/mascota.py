@@ -59,6 +59,24 @@ class Mascota:
             self.__posy) + " , Tipo: " + self.__tipo + " , Estado: " + self.__estado
         return cadena
 
+    def energiaAdejar(self, posx, posy, peso=0):
+        if self.__tipo == 'pajaro':  # energia a dejar para un pajaro
+            distanciaAdeja = CalcDistancia(int(self.__posx), int(posx), int(self.__posy), int(posy))
+            energiaAdejar = 10 + int(distanciaAdeja)
+            return energiaAdejar
+        else:  # energia a dejar para un gato
+            distanciaAdeja = CalcDistancia(int(self.__posx), int(posx), int(self.__posy), int(posy))
+            energiaAdejar = int(distanciaAdeja / 2) - 12 - int(peso)
+            return energiaAdejar
+
+    def energiaNecesitada(self, posx, posy, peso=0):
+        if self.__tipo == 'pajaro':  # energia necesitada para un pajaro
+            necesito = self.energiaAdejar(posx, posy) - self.__energia
+            return necesito
+        else:  # energia necesitada para un gato
+            necesito = self.energiaAdejar(posx, posy, peso) - self.__energia
+            return necesito
+
     @property
     def nombre(self):
         return self.__nombre

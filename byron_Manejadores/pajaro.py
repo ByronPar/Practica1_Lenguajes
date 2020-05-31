@@ -26,12 +26,3 @@ class Pajaro(Mascota):
             return f'{self.__nombre}, Ya fui a dejar el mensaje a ( {posx} , {posy} )'
         elif self.__energia < self.energiaAdejar(posx, posy):
             return f'{self.__nombre}, Estoy exhausto. Dame de comer {self.energiaNecesitada(posx, posy)} para ir.'
-
-    def energiaNecesitada(self, posx, posy):
-        necesito = self.energiaAdejar(posx, posy) - self.__energia
-        return necesito
-
-    def energiaAdejar(self, posx, posy):
-        distanciaAdeja = CalcDistancia(int(self.__posx), int(posx), int(self.__posy), int(posy))
-        energiaAdejar = 10 + int(distanciaAdeja)
-        return energiaAdejar
