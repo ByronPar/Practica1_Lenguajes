@@ -24,11 +24,11 @@ class Variable:
 
     def positivo_var(self):
         if self.valor < 0:
-            self.valor = -(self.valor)
+            self.valor = -self.valor
 
     def negativo_var(self):
         if self.valor > 0:
-            self.valor = -(self.valor)
+            self.valor = -self.valor
 
     @property
     def nombre(self):
