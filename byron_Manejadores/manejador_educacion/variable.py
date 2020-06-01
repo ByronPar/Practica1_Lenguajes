@@ -10,14 +10,14 @@ def return_variable(nombre_var):
 
 class Variable:
     def __init__(self, nombre, valor):
-        self.__nombre = nombre
-        self.__valor = valor
+        self.__nombre = str(nombre)
+        self.__valor = int(valor)
 
     def incrementar_var(self):
         self.valor += 1
 
     def mitad_var(self):
-        self.valor /=  2
+        self.valor /= 2
 
     def triple_var(self):
         self.valor *= 3

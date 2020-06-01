@@ -27,12 +27,14 @@ def archivo():  # Cargo mi archivo .edu y genero mis datos con programación fun
 
 def crear_Variable(datos_var):
     atributos = datos_var.split(sep=',')
-    valor = calcular_valor(atributos[1].strip)
+    datos = atributos[1].split(sep=' ')
+    valor = calcular_valor(datos)
     listaVariables.append(Variable(atributos[0], valor))
 
 
 def postfija(expresion, fecha, hora):
-    post = calculo_posfija(expresion.strip())
+    datos = expresion.split(sep=' ')
+    post = calculo_posfija(datos)
     escritura = f'\n[{fecha}   {hora}]   Postfija: {post}'
     return escritura
 
@@ -64,7 +66,9 @@ def negativo_var(datos_var):
 
 def potencia(datos_var, fecha, hora):
     atributos = datos_var.split(sep=',')
-    valor = calculo_potencia(atributos[0].strip(), atributos[1].strip())
+    datos1 = atributos[0].split(sep=' ')
+    datos2 = atributos[1].split(sep=' ')
+    valor = calculo_potencia(datos1, datos2)
     escritura = f'\n[{fecha}   {hora}]   Potencia: {valor}'
     return escritura
 
