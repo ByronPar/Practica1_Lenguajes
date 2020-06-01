@@ -3,6 +3,7 @@ import sys
 
 from byron_menus import educacion
 from byron_menus import Entretenimiento
+from byron_menus import almacen
 
 
 def mostrar_menuOpciones():
@@ -80,7 +81,7 @@ class Menu:
 
         self.elecciones_Educacion = {  # mi diccionario menu
             "1": self.archivo_Educacion,
-            #"2": self.archivo_Almacen,
+            "2": self.archivo_Almacen,
             "3": regresar
         }
 
@@ -126,6 +127,10 @@ class Menu:
 
     def archivo_Educacion(self):
         educacion.archivo()
+        self.educacion()
+
+    def archivo_Almacen(self):
+        almacen.archivo()
         self.educacion()
 
 
