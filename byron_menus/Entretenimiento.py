@@ -8,54 +8,54 @@ from byron_Manejadores.manejador_mascotas.mascota import listaMascotas, return_M
 
 def crear_Pajaro(name_paj, fecha, hora):
     listaMascotas.append(Pajaro(name_paj))
-    escritura = "\n[" + fecha + "  " + hora + "]  " + "Se Creo el pájaro " + name_paj
+    escritura = f'\n[{fecha}  {hora}]  Se creo el pájaro {name_paj}'
     return escritura
 
 
 def puede_entregar_mensaje(datos_paj, fecha, hora):
     atributos = datos_paj.split(sep=',')
     pajaro = return_Mascota(atributos[0])
-    escritura = "\n[" + fecha + "  " + hora + "]  " + pajaro.puedeEntregarMensaje(atributos[1], atributos[2])
+    escritura = f'\n[{fecha}  {hora}]  {pajaro.puedeEntregarMensaje(atributos[1], atributos[2])}'
     return escritura
 
 
 def enviar_mensaje(datos_paj, fecha, hora):
     atributos = datos_paj.split(sep=',')
     pajaro = return_Mascota(atributos[0])
-    escritura = "\n[" + fecha + "  " + hora + "]  " + pajaro.enviarMensaje(atributos[1], atributos[2])
+    escritura = f'\n[{fecha}  {hora}]  {pajaro.enviarMensaje(atributos[1], atributos[2])}'
     return escritura
 
 
 def crear_Gato(name_cat, fecha, hora):
     listaMascotas.append(Gato(name_cat))
-    escritura = "\n[" + fecha + "  " + hora + "]  " + "Se Creo el gato " + name_cat
+    escritura = f'\n[{fecha}  {hora}]  Se creo el gato {name_cat}'
     return escritura
 
 
 def conviene_comer_raton(datos_cat, fecha, hora):
     atributos = datos_cat.split(sep=',')
     gato = return_Mascota(atributos[0])
-    escritura = "\n[" + fecha + "  " + hora + "]  " + gato.conviene_Comer(atributos[1], atributos[2], atributos[3])
+    escritura = f'\n[{fecha}  {hora}]  {gato.conviene_Comer(atributos[1], atributos[2], atributos[3])}'
     return escritura
 
 
 def enviar_comer_raton(datos_cat, fecha, hora):
     atributos = datos_cat.split(sep=',')
     gato = return_Mascota(atributos[0])
-    escritura = "\n[" + fecha + "  " + hora + "]  " + gato.comer_raton(atributos[1], atributos[2], atributos[3])
+    escritura = f'\n[{fecha}  {hora}]  {gato.comer_raton(atributos[1], atributos[2], atributos[3])}'
     return escritura
 
 
 def enviar_comer(datos_Animal, fecha, hora):
     atributos = datos_Animal.split(sep=',')
     mascota = return_Mascota(atributos[0])
-    escritura = "\n[" + fecha + "  " + hora + "]  " + mascota.dar_Comida(atributos[1])
+    escritura = f'\n[{fecha}  {hora}]  {mascota.dar_Comida(atributos[1])}'
     return escritura
 
 
 def resumen_mascota(name_mascota, fecha, hora):
     mascota = return_Mascota(name_mascota)
-    escritura = "\n[" + fecha + "  " + hora + "]  " + mascota.resumen_Mascota()
+    escritura = f'\n[{fecha}  {hora}]  {mascota.resumen_Mascota()}'
     return escritura
 
 
@@ -87,40 +87,40 @@ def splitDatos(datos):  # METODO PARA SEPARAR MIS INSTRUCCIONES
         inst_y_dat = i.split(sep=':')
         if inst_y_dat[0] == "Crear_Pajaro":
 
-            instruccionesNuevas = instruccionesNuevas + crear_Pajaro(inst_y_dat[1], fechaActual, horaActual)
+            instruccionesNuevas += crear_Pajaro(inst_y_dat[1], fechaActual, horaActual)
 
         elif inst_y_dat[0] == "Puede_Entregar_Mensaje":
 
-            instruccionesNuevas = instruccionesNuevas + puede_entregar_mensaje(inst_y_dat[1], fechaActual, horaActual)
+            instruccionesNuevas += puede_entregar_mensaje(inst_y_dat[1], fechaActual, horaActual)
 
         elif inst_y_dat[0] == "Enviar_Mensaje":
 
-            instruccionesNuevas = instruccionesNuevas + enviar_mensaje(inst_y_dat[1], fechaActual, horaActual)
+            instruccionesNuevas += enviar_mensaje(inst_y_dat[1], fechaActual, horaActual)
 
         elif inst_y_dat[0] == "Crear_Gato":
 
-            instruccionesNuevas = instruccionesNuevas + crear_Gato(inst_y_dat[1], fechaActual, horaActual)
+            instruccionesNuevas += crear_Gato(inst_y_dat[1], fechaActual, horaActual)
 
         elif inst_y_dat[0] == "Conviene_Comer_Raton":
 
-            instruccionesNuevas = instruccionesNuevas + conviene_comer_raton(inst_y_dat[1], fechaActual, horaActual)
+            instruccionesNuevas += conviene_comer_raton(inst_y_dat[1], fechaActual, horaActual)
 
         elif inst_y_dat[0] == "Enviar_Comer_Raton":
 
-            instruccionesNuevas = instruccionesNuevas + enviar_comer_raton(inst_y_dat[1], fechaActual, horaActual)
+            instruccionesNuevas += enviar_comer_raton(inst_y_dat[1], fechaActual, horaActual)
 
         elif inst_y_dat[0] == "Dar_de_Comer":
 
-            instruccionesNuevas = instruccionesNuevas + enviar_comer(inst_y_dat[1], fechaActual, horaActual)
+            instruccionesNuevas += enviar_comer(inst_y_dat[1], fechaActual, horaActual)
 
         elif inst_y_dat[0] == "Resumen_Mascota":
 
-            instruccionesNuevas = instruccionesNuevas + resumen_mascota(inst_y_dat[1], fechaActual, horaActual)
+            instruccionesNuevas += resumen_mascota(inst_y_dat[1], fechaActual, horaActual)
 
         elif inst_y_dat[0] == "Resumen_Global":
-            instruccionesNuevas = instruccionesNuevas + "\n--------------------------------    RESUMEN GLOBAL  -----------------------------"
-            instruccionesNuevas = instruccionesNuevas + resumenGlobal()
-            instruccionesNuevas = instruccionesNuevas + "\n---------------------------------------------------------------------------------"
+            instruccionesNuevas += "\n--------------------------------    RESUMEN GLOBAL  -----------------------------"
+            instruccionesNuevas += resumenGlobal()
+            instruccionesNuevas += "\n---------------------------------------------------------------------------------"
     newrut = "C:\\Users\\ByronJosué\\Desktop\\ResumenMascotas.mascotas_result"
     arch = open(newrut, 'w')
     arch.write(instruccionesNuevas)

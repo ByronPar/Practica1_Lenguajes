@@ -27,7 +27,7 @@ def CalcDistancia(p1X, p2X, p1Y, p2Y):  # CALCULO DE LA DISTANCIA RRECORRIDA
 
 
 class Mascota:
-    def __init__(self, nombre=None, tipo=None):
+    def __init__(self, nombre, tipo):
         self.__nombre = nombre
         self.__energia = 1
         self.__estado = "vivo"

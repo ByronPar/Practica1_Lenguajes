@@ -68,7 +68,6 @@ def quit():
 
 class Menu:
     def __init__(self):
-        self.Educacion = Educacion()
         self.elecciones = {  # mi diccionario menu
             "1": self.entretenimiento,
             "2": self.educacion,
@@ -81,7 +80,7 @@ class Menu:
 
         self.elecciones_Educacion = {  # mi diccionario menu
             "1": self.archivo_Educacion,
-            "2": self.archivo_Almacen,
+            #"2": self.archivo_Almacen,
             "3": regresar
         }
 
