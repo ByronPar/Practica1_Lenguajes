@@ -1,11 +1,16 @@
 
 
-ALMACEN = []
+ALMACEN = [1]
+TOKENS = []
+def return_Token(id):
+    for Token in TOKENS:
+        if Token.id == id:
+            return Token
 
 
 class Token:
-    def __init__(self, idU, posicion, cadena):
-        self.__id = idU
+    def __init__(self, id, posicion, cadena):
+        self.__id = id
         self.__posicion = posicion
         self.__tamanio = len(cadena)
 

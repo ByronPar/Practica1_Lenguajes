@@ -16,7 +16,6 @@ def archivo():  # Cargo mi archivo .edu y genero mis datos con programación fun
             f.close()
             os.system("cls")
             print("\nEl  archivo fue registrado correctamente")
-        # AQUI RETORNARE MI LINK CON MI ARCHIVO CREADO
         else:
             os.system("cls")
             print("\nEl  archivo no existe ingrese una dirección valida")

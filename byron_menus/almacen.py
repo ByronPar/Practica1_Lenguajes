@@ -1,6 +1,9 @@
 import os
 import time
-
+from byron_Manejadores.manejador_almacen.caracteres import Token
+from byron_Manejadores.manejador_almacen.caracteres import ALMACEN
+from byron_Manejadores.manejador_almacen.caracteres import TOKENS
+from  byron_Manejadores.manejador_almacen.caracteres import return_Token
 
 def archivo():
     ruta = input("\n Ingrese la dirección donde se encuentre su Archivo .almacen     ")
@@ -20,7 +23,18 @@ def archivo():
         os.system("cls")
         print("\n Debe Ingresar Un archivo con la extension solicitada,    VUELVA A INTENTARLO")
 
-def declarar():
+def declarar(id_Cadena):
+    datos = id_Cadena.split(sep=',') #datos[0] = id     datos[1] = cadena
+    TOKENS.append(Token(datos[0],len(ALMACEN),datos[1]))    # creo un token y lo almaceno
+    ALMACEN.append(len(datos[1])) # agrego el largo de la cadena al vector de caracteres
+    for i in datos[1]:      #listo cada caracter en el vector
+        ALMACEN.append(i)
+
+def concatenar(cadenas):
+    datos = cadenas.split(sep=',')
+    Token1 = return_Token(datos[0])
+    token2 = return_Token(datos[1])
+    ALMACEN.append(Token1.tamanio + token2.tamanio)
 
 def splitDatos(datos):
     instruccion = datos.split('\n')
@@ -31,11 +45,11 @@ def splitDatos(datos):
         inst_y_dat = i.split(sep=':')
         if inst_y_dat[0] == "Declarar":
 
-            instruccionesNuevas += declarar(inst_y_dat[1], fechaActual, horaActual)
+            declarar(inst_y_dat[1])
 
-        elif inst_y_dat[0] == "Puede_Entregar_Mensaje":
+        elif inst_y_dat[0] == "Concatenar":
 
-            instruccionesNuevas += puede_entregar_mensaje(inst_y_dat[1], fechaActual, horaActual)
+            concatenar(inst_y_dat[1])
 
         elif inst_y_dat[0] == "Enviar_Mensaje":
 

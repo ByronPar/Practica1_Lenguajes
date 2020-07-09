@@ -136,6 +136,6 @@ class Menu:
 
 if __name__ == "__main__":
     mostrar_menu()
-    input("\n     --->   Presione Enter Para Continuar")
+    input("\n     --------->   Presione Enter Para Continuar")
     os.system("cls")
     Menu().run()
