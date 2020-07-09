@@ -3,7 +3,8 @@ import time
 from byron_Manejadores.manejador_almacen.caracteres import Token
 from byron_Manejadores.manejador_almacen.caracteres import ALMACEN
 from byron_Manejadores.manejador_almacen.caracteres import TOKENS
-from  byron_Manejadores.manejador_almacen.caracteres import return_Token
+from byron_Manejadores.manejador_almacen.caracteres import return_Token
+
 
 def archivo():
     ruta = input("\n Ingrese la dirección donde se encuentre su Archivo .almacen     ")
@@ -23,18 +24,53 @@ def archivo():
         os.system("cls")
         print("\n Debe Ingresar Un archivo con la extension solicitada,    VUELVA A INTENTARLO")
 
+
 def declarar(id_Cadena):
-    datos = id_Cadena.split(sep=',') #datos[0] = id     datos[1] = cadena
-    TOKENS.append(Token(datos[0],len(ALMACEN),datos[1]))    # creo un token y lo almaceno
-    ALMACEN.append(len(datos[1])) # agrego el largo de la cadena al vector de caracteres
-    for i in datos[1]:      #listo cada caracter en el vector
+    datos = id_Cadena.split(sep=',')  # datos[0] = id     datos[1] = cadena
+    TOKENS.append(Token(datos[0], len(ALMACEN), datos[1]))  # creo un token y lo almaceno
+    ALMACEN.append(len(datos[1]))  # agrego el largo de la cadena al vector de caracteres
+    for i in datos[1]:  # listo cada caracter en el vector
         ALMACEN.append(i)
+    ALMACEN[0] = len(ALMACEN)  # cambiar el valor del vector en la posicion 1
+
 
 def concatenar(cadenas):
     datos = cadenas.split(sep=',')
-    Token1 = return_Token(datos[0])
-    token2 = return_Token(datos[1])
-    ALMACEN.append(Token1.tamanio + token2.tamanio)
+    token = return_Token(datos[0])
+    num = token.tamanio
+    cadena = token.cadena
+    token = return_Token(datos[1])
+    num += token.tamanio
+    cadena += token.cadena
+    ALMACEN.append(num)
+    for i in cadena:
+        ALMACEN.append(i)
+    ALMACEN[0] = len(ALMACEN)  # cambiar el valor del vector en la posicion 1
+
+
+def posicion_cadena(id, fecha, hora):
+    token = return_Token(id)
+    return token.imprimir_pos(fecha, hora)
+
+
+def tamanio_cadena(id, fecha, hora):
+    token = return_Token(id)
+    return token.imprimir_tam(fecha, hora)
+
+
+def imprimir(id, fecha, hora):
+    token = return_Token(id)
+    return token.imprimir(fecha, hora)
+
+
+def generar_grafo(link1, link2):
+    url = link1+link2
+    url = url[1 : -1]  # le quito las comillas dobles a la url
+    
+
+
+
+
 
 def splitDatos(datos):
     instruccion = datos.split('\n')
@@ -51,29 +87,22 @@ def splitDatos(datos):
 
             concatenar(inst_y_dat[1])
 
-        elif inst_y_dat[0] == "Enviar_Mensaje":
+        elif inst_y_dat[0] == "Posicion_cadena":
 
-            instruccionesNuevas += enviar_mensaje(inst_y_dat[1], fechaActual, horaActual)
+            instruccionesNuevas += posicion_cadena(inst_y_dat[1], fechaActual, horaActual)
 
-        elif inst_y_dat[0] == "Crear_Gato":
+        elif inst_y_dat[0] == "Tamanio":
 
-            instruccionesNuevas += crear_Gato(inst_y_dat[1], fechaActual, horaActual)
+            instruccionesNuevas += tamanio_cadena(inst_y_dat[1], fechaActual, horaActual)
 
-        elif inst_y_dat[0] == "Conviene_Comer_Raton":
+        elif inst_y_dat[0] == "Imprimir":
 
-            instruccionesNuevas += conviene_comer_raton(inst_y_dat[1], fechaActual, horaActual)
+            instruccionesNuevas += imprimir(inst_y_dat[1], fechaActual, horaActual)
 
-        elif inst_y_dat[0] == "Enviar_Comer_Raton":
+        elif inst_y_dat[0] == "Generar_grafo":
 
-            instruccionesNuevas += enviar_comer_raton(inst_y_dat[1], fechaActual, horaActual)
+            generar_grafo(inst_y_dat[1], inst_y_dat[2])
 
-        elif inst_y_dat[0] == "Dar_de_Comer":
-
-            instruccionesNuevas += enviar_comer(inst_y_dat[1], fechaActual, horaActual)
-
-        elif inst_y_dat[0] == "Resumen_Mascota":
-
-            instruccionesNuevas += resumen_mascota(inst_y_dat[1], fechaActual, horaActual)
 
     newrut = "C:\\Users\\ByronJosué\\Desktop\\almacenes.almacen_result"
     arch = open(newrut, 'w')

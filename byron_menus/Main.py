@@ -135,6 +135,9 @@ class Menu:
 
 
 if __name__ == "__main__":
+    s = "sds"
+    l = s *5
+    print(l)
     mostrar_menu()
     input("\n     --------->   Presione Enter Para Continuar")
     os.system("cls")
