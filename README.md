@@ -35,7 +35,7 @@ https://www.python.org/downloads/
 
 
 
-## Contribuciones
+### Contribuciones
 
 Si desea enviar algún comentario, algun problema, agradezco sus comentarios y dudas, aunque tenga en cuenta que el proyecto está incompleto con respecto a excepciones comunes como (ingresar numeros cunado se le solicita una Cadena , etc .. ) pero son excepciones comunes que estoy seguro que cualquiera que lo desee puede añadirlo sin problema.  La funcionalidad requerida si esta completa :)
 
