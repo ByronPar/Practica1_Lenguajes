@@ -25,10 +25,11 @@ https://github.com/xflr6/graphviz/tree/529d3d25c934c8502dea2166b26f155a73d5a7f5/
 
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para ejecutar el programa
+Que necesitas para ejecutar el programa
 
 ```
-- Unicamente tener instalado la ultima versión de python, con ello podran ejecutarlo desde su consola.```
+- Unicamente tener instalado la ultima versión de python, con ello podran ejecutarlo desde su consola.
+```
 https://www.python.org/downloads/
 
 
@@ -37,8 +38,8 @@ https://www.python.org/downloads/
 
 ### Contribuciones
 
-Si desea enviar algún comentario, algun problema, agradezco sus comentarios y dudas, aunque tenga en cuenta que el proyecto está incompleto con respecto a excepciones comunes como (ingresar numeros cunado se le solicita una Cadena , etc .. ) pero son excepciones comunes que estoy seguro que cualquiera que lo desee puede añadirlo sin problema.  La funcionalidad requerida si esta completa :)
+Si desea enviar algún comentario, algun problema, agradezco sus comentarios y dudas, aunque tenga en cuenta que el proyecto está incompleto con respecto a excepciones comunes como (ingresar numeros cunado se le solicita una Cadena , etc .. ) pero son excepciones comunes que estoy seguro que cualquiera que lo desee puede añadirlo sin problema.  La funcionalidad requerida si esta completa     :) 
 
 
----
+
 ⌨️ con ❤️ por [SPM Poeta - Byron Par] (https://github.com/ByronPar) 😊
