@@ -65,13 +65,23 @@ def imprimir(id, fecha, hora):
 
 def generar_grafo(link1, link2):
     from graphviz import Digraph
-    url = link1+link2
-    url = url[1 : -1]  # le quito las comillas dobles a la url
-    f = Digraph(format='jpg', name='Almacen de Caracteres', directory="C:\\Users\\ByronJosué\\Desktop",
+    url = link1 + ':' + link2
+    url = url[1: -1]  # le quito las comillas dobles a la url
+
+    # si la dirección ingresada ya existe un archivo igual  debo borrarlo
+    prueba_url = url + "\\Almacen de Caracteres.gv"
+    if os.path.isfile(prueba_url):  # Verificar que el archivo exista y borro lo anteriores archivos
+        os.remove(prueba_url)
+        prueba_url += '.jpg'
+        os.remove(prueba_url)
+    prueba_url = "C:\\Users\\ByronJosué\\Desktop\\almacenes.almacen_result"
+    if os.path.isfile(prueba_url):
+        os.remove(prueba_url)
+
+    f = Digraph(format='jpg', name='Almacen de Caracteres', directory=url,
                 node_attr={'shape': 'plaintext'})
     f.attr(rankdir='LR', size='9,5')
     # Creación de nodos (tabla)
-
     tabla_variables = '''<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" ALIGN="CENTER">
       <TR>
@@ -82,19 +92,36 @@ def generar_grafo(link1, link2):
         <TD WIDTH="150" COLSPAN="1" ALIGN="LEFT"><B>POSICIÓN</B></TD>
       </TR>'''
 
-    for token in TOKENS:    # COMPLETO LA TABLA COLOCANDOLE CADA UNO DE LOS VALORES
+    for token in TOKENS:  # COMPLETO LA TABLA COLOCANDOLE CADA UNO DE LOS VALORES
         tabla_variables += f'''\n<TR>
         <TD COLSPAN="1" WIDTH="150" ALIGN="LEFT">{token.id}</TD>
         <TD WIDTH="150" COLSPAN="1" ALIGN="LEFT">{token.posicion}</TD>
       </TR>'''
 
     tabla_variables += '\n</TABLE>>'  # culmino la tabla
-    f.node('struct3', tabla_variables)
+    f.node('tabla1', tabla_variables)
+
+    vector = '''<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4" ALIGN="CENTER">
+          <TR>
+            <TD COLSPAN="2" WIDTH="75" ALIGN="CENTER"><B>ALMACEN</B></TD>
+          </TR>
+          <TR>
+            <TD COLSPAN="1" WIDTH="75" ALIGN="LEFT"><B>POSICIÓN</B></TD>
+            <TD WIDTH="75" COLSPAN="1" ALIGN="LEFT"><B>VALOR</B></TD>
+          </TR>'''
+    contador = 0
+    for i in ALMACEN:  # COMPLETO LA TABLA COLOCANDOLE CADA UNO DE LOS VALORES
+        vector += f'''\n<TR>
+        <TD COLSPAN="1" WIDTH="75" ALIGN="LEFT">{contador}</TD>
+        <TD WIDTH="75" COLSPAN="1" ALIGN="LEFT">{i}</TD>
+      </TR>'''
+        contador += 1
+
+    vector += '\n</TABLE>>'  # culmino la tabla 2
+    f.node('vector', vector)
     # Creación del grafo
     f.render()
-
-
-
 
 
 def splitDatos(datos):
@@ -126,8 +153,7 @@ def splitDatos(datos):
 
         elif inst_y_dat[0] == "Generar_grafo":
 
-            generar_grafo("inst_y_dat[1]", "inst_y_dat[2]")
-
+            generar_grafo(inst_y_dat[1], inst_y_dat[2])
 
     newrut = "C:\\Users\\ByronJosué\\Desktop\\almacenes.almacen_result"
     arch = open(newrut, 'w')
