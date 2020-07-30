@@ -2,12 +2,12 @@
 
 ## Que es ? Porque?
 
-Proyecto a solicitud de un curso de la Universidad, realizado por [@Spm_Poeta/ Byron Par](https://twitter.com/Spm_Poeta) con la finalidad de aprender los conceptos basicos del lenguaje de programación **Python**, y al mismo tiempo, realizarlo con buenas practicas de programación. Si desean saber más al respecto de la funcionalidad del programa y su respectivo diseño , Porfavor verficar  [Documento de Diseño, Python Multitareas](https://github.com/jorgevgut/airquality-mx/wiki/High-level-System-Design).
+Proyecto a solicitud de un curso de la Universidad, realizado por [@Spm_Poeta/ Byron Par](https://twitter.com/Spm_Poeta) con la finalidad de aprender los conceptos basicos del lenguaje de programación **Python**, y al mismo tiempo, realizarlo con buenas practicas de programación. Si desean saber más al respecto de la funcionalidad del programa y su respectivo diseño , Porfavor verficar  [Documento de Diseño, Python Multitareas](https://github.com/ByronPar/Practica1_Lenguajes/wiki).
 
 ## Status del proyecto
 **Este project fue concluido con las funcionalidades requeridas en el enunciado del proyecto** unicamente emitiendo distintas excepciones que podrian resultar en la ejecución del programa.
 
-Si les interesa conocer un poco más de la logica utilizada en el programa , porfavor observar su respectiva [Wiki en Github](https://github.com/jorgevgut/airquality-mx/wiki).
+Si les interesa conocer un poco más de la logica utilizada en el programa , porfavor observar su respectiva [Wiki en Github](https://github.com/ByronPar/Practica1_Lenguajes/wiki).
 
 
 
